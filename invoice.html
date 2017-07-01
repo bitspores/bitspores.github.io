@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
       font-size: 36px;
       text-align: center;
       font-style: oblique;
-
+    background-repeat: no-repeat;
     }
     
     #index {
@@ -41,24 +42,401 @@
       color: #004c00;
     }
     
-    sup {
+	#comments {
+		border: 2px solid #0000FF;
+		height: 50px;
+		width: 300px;
+
+	}
+	
+	#g {
+		height: 38px;
+		width: 150px;
+	}
+	#convert {
+		margin: 0;
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		margin: 0;
+		background: rgba(255, 165, 0, 0.20);
+		//visibility: hidden;
+	}
+	
+	
+	#convert, table {
+		border: 1px solid #FFA500;
+	}
+	#convert, table, th {
+		border: 1px solid #FFA500;
+	}
+	
+	#convert, table, tr {
+		border: 1px solid #FFA500;
+	}
+	
+	#convert, table, td {
+		border: 1px solid #FFA500;
+	}
+	
+	#iframe {
+		background: rgba(255, 165, 0, 0.20);
+		height: 15px;
+		width: 300px;
+	}
+	
+	#next {
+		color: #FF4500;
+		background: #FFFFFF;
+		font-size: 38px;
+		font-weight: bold;
+		border-color: #0000FF;
+		border-radius: 90%;
+		transition: 9s;
+	}
+	
+	#gen:hover {
+		background: #FF00FF;
+		color: #0000FF;
+		font-size: 49px;
+		transition: 6s;
+		text-shadow: 28px 11px #AA0066;
+	}
+    
+	sup {
       font-size: 11px;
     }
+	
+	table {
+		border-collapse: collapse;
+	}
+	
+	table, th, td {
+		border: 1px solid black;
+	}
+	
+	th {
+		height: 50px;
+		padding: 5px;
+	}
   </style>
-</head>
-<body>
+	
+
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript">
+
+	var units = 0;
+	var cart = [];
+	
+	function add() {
+		
+		var total;
+		var price;
+		var product;
+		
+		units += 1;
+		
+		function remove() {
+			total = parseInt($("#total").html());
+			price = parseInt(product.split(" ")[2]);
+			product = $("#products").val();
+			$("#total").html(total - price);
+			row.remove();
+			
+			units -= 1;
+			convert();
+		}
+	
+		product = $("#products").val();
+
+		total = parseInt($("#total").html());
+
+		var iframe = $("#iframe");
+		
+		var orders = $("#orders");
+
+		var id = product.split(" ")[0];
+		var name = product.split(" ")[1].replace(/-/g, " ");
+		price = parseInt(product.split(" ")[2]);
+		var dollar = "$" + price;
+		
+		$("#total").html(total + price);
+		
+		convert();
+		
+		var row = $("<tr></tr>");
+		var idcell = $("<td></td<");
+		var namecell = $("<td></td<");
+		var pricecell = $("<td></td<");
+		var xcell = $("<td></td<");
+		
+		var button = $("<button>Remove</button>");
+
+		row.attr("class", "units");
+		
+		
+		button.click( remove )
+		
+		idcell.append(id);
+		namecell.append(name);
+		pricecell.append(dollar);
+		xcell.append(button);
+		
+		row.append(idcell);
+		row.append(namecell);
+		row.append(pricecell);
+		row.append(xcell);
+		
+		orders.append(row);
+		
+	}
+	
+	
+	
+	
+	function empty(element) {
+		element.css("border", "2px solid #FF0000");
+	}
+
+	function generate() {
+			
+		var firstName = $("#firstname");
+		var lastName = $("#lastname");
+		var street = $("#address");
+		var apt = $("#apt");
+		var city = $("#city");
+		var state = $("#state");
+		var zip = $("#zip");
+		var email1 = $("#email1");
+		var email2 = $("#email2");
+		
+		if (firstName.val() == "") {
+			empty(firstName);
+			return;
+		} else {
+			if (lastName.val() == "") {
+				empty(lastName);
+				return;
+			} else {
+				if (street.val() == "") {
+					empty(street);
+					return;
+				} else {
+					if (email1.val() == "") {
+						empty(email1);				
+						return;
+					} else {
+						if (email1.val() != email2.val()) {
+							empty(email1);				
+							empty(email2);
+							return;
+						} else {
+							if (street.val() == "") {
+								empty(street);
+								return;
+							} else {
+								if (city.val() == "") {
+									empty(city);
+									return;
+								} else {
+									if (state.val() == "") {
+										empty(state)
+										return;
+									} else {
+										if (zip.value == "") {
+											empty(zip);
+											return;
+										} else {
+										
+											var items = $("#orders").html().split("</tr>")[1].split("</td><td>")
+											
+											console.log(items)
+											
+											for (i = 1; i < items.length; i++) {
+												console.log(items[i])
+												cart.push(items[i])												
+												console.log(items[i])
+											}
+											
+											var letter = "My name is " + firstName.val() + " " + lastName.val() + ", I am placing an order for:\n";
+											
+											var email = "the.adjustment.bureau@riseup.net"
+						
+											$("#invoice").html(letter);
+										
+											cart = []
+											return
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	
+	function step2() {
+		var step2 = 
+		$("#form").html(step2)
+	}
+
+	function convert() {
+		if ($("#total").html() == 0) {
+			var URL = "http://bitspores.github.io/usdtobtc.html";
+		} else {		
+			var URL = "http://bitspores.github.io/usdtobtc.html?a=" + $("#total").html();
+		}
+		$("#iframe").attr('src', URL );
+
+	}
+	
+	
+	$(document).ready( function() { 
+		setInterval( convert, 10000)
+	} )
+	
+</script>
+
   <div id="shop">
-    <font color="#ffa500">Bit</font><font color="#0000FF">Spores</font> <sup> .com</sup>
+    <img src="http://pleurotus.unpocodetodo.info/img/posts/sporeprint.gif" id="spore" height="26px" width="26px">
+	<font color="#ffa500">Bit</font><font color="#0000FF">Spores</font> <sup> .com</sup>
   </div>
   <div id="index">
-  <a href="http://bitspores.github.io/index.html">Home</a> | <a href="http://bitspores.github.io/catalog/index.html">Catalog</a> | <a href="http://bitspores.github.io/invoice.html">Invoice Form</a> | <a href="http://bitspores.github.io/contact.html">Contact Us</a>
+	<a href="http://bitspores.github.io/index.html">Home</a> | <a href="http://bitspores.github.io/catalog/index.html">Catalog</a> | <a href="http://bitspores.github.io/invoice.html">Invoice Form</a> | <a href="http://bitspores.github.io/contact.html">Contact Us</a>
   </div>
   
   <hr>
+	
+
+</head>
+<body>
+
+
+	<center>
+	<h1><u>Invoice Form</u></h1>
+	
+	<div id="cart">
+		<h1><u>Step 1</u></h1>
+		<h3>Add Items:</h3>
+		
+			
+			<p>
+				Select Product:
+				<select id="products" name="select">
+					<option value="001 Psilocybe-cyanesence-Spore-Print 25">001: Psilocybe cyanesence Spore Print............$25</option>
+					<option value="002 Psilocybe-allenii-Spore-Print 35">002: Psilocybe allenii Spore Print..........$35</option>
+					<option value="003 Psilocybe-azuresence-Spore-Print 45">003: Psilocybe azuresence Spore Print...........$45</option>
+				</select>
+				<button id="add" onclick="add()">Add</button>
+			</p>
+
+			<div id="cart">
+			<h2>Cart:</h2>
+			<table id="orders">
+				<tbody>
+					<tr>
+						<th><u>Catalog ID</u></th>
+						<th><u>Product</u></th>
+						<th><u>Price</u></th>
+						<th><font color="#FF000">X</font></th>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			<u>Optional Order Comment:</u>
+			<br>
+			<textarea id="comments"></textarea>
+			
+			<p><button id="gen" onclick="generate()">Submit</button></p>
+		</div>
+		
+		
+		
+	<div id="form">
+	<hr>
+	<h1><u>Step 2</u></h1>
+	<h3>Enter Information:</h3>
+	<table>
+	<tbody>
+	<tr><td>First Name:</td><td>Last Name:</td></tr>
+	<tr><td><input type="text" id="firstname" value=""></input>*</td><td><input type="text" id="lastname" value=""></input>*</td></tr>
+	</tbody>
+	</table>
+	
+	<h3>Contact:</h3>
+	<table>
+	<tbody>
+	<tr><td>Email:</td><td>Repeat Email:</td></tr>
+	<tr><td><input type="text" id="email1" value=""></input>*</td><td><input type="text" id="email2" value=""></input>*</td></tr>
+	</tbody>
+	</table>
+	
+	<h3>Address:</h3>
+	<table>
+	<tbody>
+	<tr><td>Shipping Address:</td><td>Apartment/Suite:</td></tr>
+	<tr><td><input type="text" id="address" value=""></input>*</td><td><input type="text" id="apt" value=""></input></td></tr>
+	<tr><td>City:</td><td>State:</td></tr>
+	<tr><td><input type="text" id="state" value=""></input>*</td><td><input type="text" id="city" value=""></input>*</td></tr>
+	<tr><td>Zip Code:</td><td>Country:</td></tr>
+	<tr><td><input type="text" id="zip" value=""></input>*</td><td>USA Only (Check back soon)!</td></tr>
+	</tbody>
+	</table>
+	
+		<p><button id="next" onclick="step2()">Next</button></p>
+		
+	</div>
+	
+	
+	</center>
+	
+	<div id="convert">
+
+		<h1><u>Total</u>: $<span id="total">0</span></h1>
+		
+		
+		<u>USD to Bitcoin</u>
+		<br>
+		<iframe src="https://www.google.com/finance/converter?a=1&from=USD&to=BTC" noresize=yes frameborder=0 marginheight=0 marginwidth=0 scrolling=no id="iframe"></iframe>
+
+		<br>
+		<img src="http://i.imgur.com/6zp08wJ.png" id="g">
+		
+	</div>
+
+  <div id="invoice">
+	
+  </div>
+
   
-  <hr>
   
   
-  <p><sup>Spores intended for legal purposes only. Images provided for informational and educational reference only and originate from cultivators and labs outside the US. Cultivation of this species is illegal in many countries including the United States. Please check your local regulations.</sup></p>
 </body>
+<footer>
+	<center>
+		<hr>
+		<div id="index">
+			<a href="http://bitspores.github.io/index.html">Home</a> | <a href="http://bitspores.github.io/catalog/index.html">Catalog</a> | <a href="http://bitspores.github.io/invoice.html">Invoice Form</a> | <a href="http://bitspores.github.io/contact.html">Contact Us</a>
+		</div>
+		<hr>
+			<sup>
+			Spores intended for legal purposes only.
+			<br>Images provided for informational and educational reference only and originate from outside the US.
+			<br>Cultivation of psilocybe species is illegal in many countries including the United States. 
+			<br>It is on you to please check your local regulations.
+			</sup>
+		<hr>
+		
+	  <div id="shop">
+    <img src="http://pleurotus.unpocodetodo.info/img/posts/sporeprint.gif" id="spore" height="26px" width="26px">
+		<font color="#ffa500">Bit</font><font color="#0000FF">Spores</font> <sup> .com</sup>
+	  </div>
+		<img src="http://i.imgur.com/rO6tekt.png?2" height="180px" width="100px">
+	
+	</center>
+	
+</footer>
 </html>
