@@ -10,11 +10,13 @@
 	<script>
 		// Return URL for iFrame
 		function src(url) {
-			if (url.split("a=")) {				
-				var amount = parseInt(url.split("a=")[1]);
+			if (url.split("a=")) {
+				var amount = url.split("a=");
+					
 				if (amount == 0) {
 					return "https://www.google.com/finance/converter?a=" + 1 + "&from=USD&to=BTC";
-				} else {		
+				} else {
+					amount = parseInt(url.split("a=")[1]);
 					return "https://www.google.com/finance/converter?a=" + amount + "&from=USD&to=BTC";
 				}			
 			}
