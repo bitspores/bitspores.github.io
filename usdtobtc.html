@@ -2,7 +2,7 @@
 <head>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
-<body onLoad="window.scrollTo(0,170)">
+<body>
 
 <iframe id="iframe" src="https://www.google.com/finance/converter?a=1&from=USD&to=BTC" height=1000 width=100% frameborder=0 marginheight=0 marginwidth=0 scrolling=no></iframe>
 
@@ -23,6 +23,8 @@
 		// Create iFrame
 		var iframe = $("#iframe");
 		
+		$(body).append(iframe)
+		
 		// Get Dollar amount from URL
 		var URL = src(window.location.href);
 		
@@ -30,5 +32,6 @@
 		iframe.attr('src', URL);
 
 		// Scroll
-		iframe.onload = window.scrollTo(0,170);
+		iframe.onload = window.scrollTo(0,110);
+		
 	</script>
