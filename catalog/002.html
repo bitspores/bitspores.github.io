@@ -31,10 +31,45 @@
       color: #004c00;
     }
     
+   
+	
+	#convert, table {
+		border: 1px solid #FFA500;
+	}
+	#convert, table, th {
+		border: 1px solid #FFA500;
+	}
+	
+	#convert, table, tr {
+		border: 1px solid #FFA500;
+	}
+	
+	#convert, table, td {
+		border: 1px solid #FFA500;
+	}
+	#convert {
+		margin: 0;
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		margin: 0;
+		background: rgba(255, 0, 255, 0.40);
+		//visibility: hidden;
+		text-align: center;
+	}
     sup {
       font-size: 11px;
     }
   </style>
+  <script>
+    function convert() {
+      var URL = "https://bitspores.github.io/usdtobtc.html?a=1";
+      $("#iframe").attr('src', URL );
+    }
+    $(document).ready( function() { 
+      setInterval( convert, 10000)
+    } )
+  </script>
 </head>
 <body>
   <div id="shop">
@@ -58,6 +93,26 @@
     <iframe id="pricebox" src="https://www.google.com/finance/converter?a=35&from=USD&to=BTC" style="border: 5px solid #ffa500; height: 260px; width: 525px;" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
 
   
-  <p><sup>Spores intended for legal purposes only. Images provided for informational and educational reference only and originate from cultivators and labs outside the US. Cultivation of this species is illegal in many countries including the United States. Please check your local regulations.</sup></p>
+  <footer>
+	<center>
+		<hr>
+		<div id="index">
+			<a href="http://bitspores.github.io/index.html">Home</a> | <a href="http://bitspores.github.io/catalog/index.html">Catalog</a> | <a href="http://bitspores.github.io/invoice.html">Invoice Form</a> | <a href="http://bitspores.github.io/contact.html">Contact Us</a>
+		</div>
+		<hr>
+			<sup>
+			Spores intended for legal purposes only.
+			<br>Images provided for informational and educational reference only and originate from outside the US.
+			<br>Cultivation of psilocybe species is illegal in many countries including the United States. 
+			<br>It is on you to please check your local regulations.
+			</sup>
+		<hr>
+		
+	  <div id="shop">
+    <img src="http://pleurotus.unpocodetodo.info/img/posts/sporeprint.gif" id="spore" height="26px" width="26px">
+		<font color="#ffa500">Bit</font><font color="#0000FF">Spores</font> <sup> .com</sup>
+	  </div>
+	</center>
+	</footer>
 </body>
 </html>
